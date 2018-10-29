@@ -22,13 +22,13 @@ function ListItem(activity, notes) {
 
 // ------------------ UI logic---------------------
 
-var putListOnScreen = function(items) {
+var putListOnScreen = function(list) {
 
-  $("#todolist").append("<li>" + item.activity + " " + item.notes + "</li>");
-  for (i = 0; i < shopingList.items.length; i++) {
-    var activity = shopingList.items[i].activity;
-    var note = shopingList.items[i].notes;
-    // console.log(activity, note);
+  for (i = 0; i < list.items.length; i++) {
+    var activity = list.items[i].activity;
+    var note = list.items[i].notes;
+    $("#todolist").append("<li>" + activity + " " + note + "</li>");
+    console.log(activity, note);
   }
 
 }
@@ -37,11 +37,15 @@ var putListOnScreen = function(items) {
 $(document).ready(function() {
   $("form#form1").submit(function(event) {
     event.preventDefault();
-    // var newlist = new List("what the user wants to call it");
-    //
-    // var newItem = new ListItem(userInput);
-    //
-    // newlist
+
+    var newList = new List($("#name-of-user").val());
+    var newItem = new ListItem($("#task-list").val(), $("#task-notes").val());
+    newList.addItem(newItem);
+
+    putListOnScreen(newList);
+
+    console.log(newList, newList.items);
+
   });
 
 });
